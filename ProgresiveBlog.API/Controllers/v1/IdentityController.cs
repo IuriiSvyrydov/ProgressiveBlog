@@ -40,11 +40,12 @@ namespace ProgresiveBlog.API.Controllers.v1
             var command = _mapper.Map<LoginCommand>(login);
             var result = await _mediator.Send(command);
             if (result.IsError) return HandleErrorResponse(result.Errors);
-            var authResult = new AuthenticationResult
-            {
-                Token = result.Payload
-            };
-            return Ok(authResult);
+            //var authResult = new AuthenticationResult
+            //{
+            //    Token = result.Payload
+            //};
+            //return Ok(authResult);
+            return Ok(_mapper.Map<IdentityUserProfileDto>(result.Payload));
         }
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
