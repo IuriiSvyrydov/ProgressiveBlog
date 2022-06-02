@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Identity\Query\" />
     <Folder Include="MappingProfile\" />
     <Folder Include="Posts\QueryHandlers\" />
   </ItemGroup>

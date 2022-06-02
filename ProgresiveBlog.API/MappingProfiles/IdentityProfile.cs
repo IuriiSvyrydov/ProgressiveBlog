@@ -1,5 +1,5 @@
-﻿using ProgresiveBlog.API.Contracts.Identity;
-using ProgresiveBlog.Application.Identity.Commands;
+﻿
+using ProgresiveBlog.Application.Identity.Dtos;
 
 namespace ProgresiveBlog.API.MappingProfiles
 {
@@ -9,6 +9,7 @@ namespace ProgresiveBlog.API.MappingProfiles
         {
             CreateMap<UserRegistration, RegisterIdentity>().ReverseMap();
             CreateMap<Login, LoginCommand>();
+            CreateMap<IdentityUserProfileDto,IdentityUserProfile>().ReverseMap();
         }
     }
 }

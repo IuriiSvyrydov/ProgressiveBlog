@@ -1,4 +1,6 @@
-﻿using ProgresiveBlog.Application.Identity.Dtos;
+﻿using Microsoft.AspNetCore.Http.Features;
+using ProgresiveBlog.Application.Identity.Dtos;
+using ProgresiveBlog.Application.Identity.Query;
 
 namespace ProgresiveBlog.API.Controllers.v1
 {
@@ -64,7 +66,23 @@ namespace ProgresiveBlog.API.Controllers.v1
             var result = await _mediator.Send(command);
             if (result.IsError) return HandleErrorResponse(result.Errors);
             return NoContent();
-            
+        }
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [HttpGet]
+        [Route(ApiRoutes.Identity.CurrentUser)]
+        public async Task<IActionResult> CurrentUser(CancellationToken cancellationToken)
+        {
+            var userProfileId = HttpContext.GetUserProfileIdClaimValue();
+            var query = new CurrentUser
+            {
+                UserProfileId = userProfileId,
+                ClaimsPrincipal =HttpContext.User
+
+            };
+            var result = await _mediator.Send(query,cancellationToken);
+            if (result.IsError)   return HandleErrorResponse(result.Errors);
+
+            return Ok(_mapper.Map<IdentityUserProfile>(result.Payload));
         }
     }
 }

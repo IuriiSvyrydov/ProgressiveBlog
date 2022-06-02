@@ -64,7 +64,7 @@ namespace ProgresiveBlog.Application.Identity.Handlers
         {
             var identityUser = await _manager.FindByEmailAsync(request.UserName);
             if (identityUser is null)
-                _result.AddError(ErrorCode.IdentityUserDoesNotExist, IdentityErrorMessage.NonExistingUserManager);
+                _result.AddError(ErrorCode.IdentityUserDoesNotExist, IdentityErrorMessage.NonExistingUserIdentity);
                 
             
             var validPassword =

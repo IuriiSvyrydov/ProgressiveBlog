@@ -22,6 +22,7 @@
             public const string Login = "login";
             public const string Register = "registration";
             public const string RemovalById = "IdentityUserId";
+            public const string CurrentUser = "currentUser";
         }
     }
 
